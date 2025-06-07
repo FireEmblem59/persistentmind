@@ -26,7 +26,7 @@
         "*://aistudio.google.com/*"
       ],
       "js": ["loader.js"],
-      "css": ["style.css"],
+      "css": ["style.css", "update-banner.css"],
       "run_at": "document_idle"
     }
   ],
@@ -36,7 +36,12 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["contentScript.js", "modules/*.js", "platforms/*.js"],
+      "resources": [
+        "contentScript.js",
+        "modules/*.js",
+        "platforms/*.js",
+        "update-banner.css"
+      ],
       "matches": ["<all_urls>"]
     }
   ]

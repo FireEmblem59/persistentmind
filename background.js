@@ -35,17 +35,66 @@ function compareVersions(v1, v2) {
  * @param {string} newVersion The new version string (e.g., "1.1.0").
  * @param {string} detailsUrl The URL to open when the button is clicked.
  */
-function showUpdateNotification(newVersion, detailsUrl) {
-  chrome.notifications.create(NOTIFICATION_ID, {
+
+async function showUpdateNotification(newVersion, detailsUrl) {
+  // --- 1. NATIVE NOTIFICATION (Primary Method) ---
+  console.log("Attempting to create native notification...");
+  const notificationOptions = {
     type: "basic",
     iconUrl: "icons/icon128.png",
     title: "PersistentMind Update Available",
     message: `A new version (${newVersion}) is available. Click below for details.`,
     buttons: [{ title: "View Update & Installation Info" }],
-    priority: 2, // High priority
+    priority: 2,
+    requireInteraction: true,
+  };
+
+  chrome.notifications.create(
+    NOTIFICATION_ID,
+    notificationOptions,
+    (notificationId) => {
+      if (chrome.runtime.lastError) {
+        console.error(
+          "Native notification failed:",
+          chrome.runtime.lastError.message
+        );
+      } else {
+        console.log(
+          "Native notification created successfully with ID:",
+          notificationId
+        );
+      }
+    }
+  );
+
+  // --- 2. IN-PAGE BANNER (Fallback/Secondary Method) ---
+  console.log("Sending message to content scripts to show in-page banner.");
+  // Find all active tabs that are running our content script
+  const tabs = await chrome.tabs.query({
+    url: [
+      "*://chat.deepseek.com/*",
+      "*://chatgpt.com/*",
+      "*://gemini.google.com/*",
+      "*://aistudio.google.com/*",
+    ],
   });
 
-  // Store the URL to be opened when the notification button is clicked
+  // Send a message to each of those tabs
+  for (const tab of tabs) {
+    try {
+      await chrome.tabs.sendMessage(tab.id, {
+        type: "SHOW_UPDATE_BANNER",
+        version: newVersion,
+        url: detailsUrl,
+      });
+    } catch (e) {
+      console.warn(
+        `Could not send message to tab ${tab.id}. It might be inactive or not ready.`
+      );
+    }
+  }
+
+  // Store the URL for the native notification click
   chrome.storage.local.set({ updateUrl: detailsUrl });
 }
 

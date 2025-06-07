@@ -17,6 +17,64 @@ const sharedState = {
   lastUsedInitialPromptForStripping: "",
 };
 
+const BANNER_SESSION_STORAGE_KEY = "persistentMindUpdateBannerClosed";
+
+/**
+ * Creates and displays the in-page update banner.
+ * @param {string} version - The new version string (e.g., "1.0.2").
+ * @param {string} url - The URL for the update details.
+ */
+function showUpdateBanner(version, url) {
+  // Don't show the banner if the user already closed it in this session
+  if (sessionStorage.getItem(BANNER_SESSION_STORAGE_KEY)) {
+    console.log(
+      "PersistentMind: Update banner already closed this session. Skipping."
+    );
+    return;
+  }
+
+  // Remove any existing banner to avoid duplicates
+  const existingBanner = document.getElementById(
+    "persistentmind-update-banner"
+  );
+  if (existingBanner) {
+    existingBanner.remove();
+  }
+
+  // Create the banner elements
+  const banner = document.createElement("div");
+  banner.id = "persistentmind-update-banner";
+  banner.className = "persistentmind-update-banner";
+
+  banner.innerHTML = `
+    <p>A new version of PersistentMind (v${version}) is available!</p>
+    <a href="${url}" target="_blank" rel="noopener noreferrer" class="persistentmind-update-link">View Update</a>
+    <button class="persistentmind-close-btn" title="Dismiss">×</button>
+  `;
+
+  // Add event listener to the close button
+  const closeBtn = banner.querySelector(".persistentmind-close-btn");
+  closeBtn.addEventListener("click", () => {
+    banner.remove();
+    // Remember that the user closed the banner for this session
+    sessionStorage.setItem(BANNER_SESSION_STORAGE_KEY, "true");
+  });
+
+  // Append the banner to the page body
+  document.body.appendChild(banner);
+  console.log("PersistentMind: In-page update banner displayed.");
+}
+
+// Listen for messages from the background script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === "SHOW_UPDATE_BANNER") {
+    showUpdateBanner(message.version, message.url);
+    // It's good practice to send a response
+    sendResponse({ status: "Banner shown" });
+  }
+  return true; // Keep the message channel open for async response
+});
+
 async function initializePersistentMind() {
   determineCurrentPlatform(); // This sets currentPlatformConfig and currentAdapter in platformUtils.js
   const currentPlatform = getPlatformConfig();

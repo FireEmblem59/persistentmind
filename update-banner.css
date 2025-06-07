@@ -1,0 +1,55 @@
+/* update-banner.css */
+/* Styles for our custom in-page update notification */
+
+.persistentmind-update-banner {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #3498db; /* A nice blue */
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  z-index: 2147483647; /* Max z-index to stay on top */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.persistentmind-update-banner p {
+  margin: 0;
+  padding: 0;
+  color: white; /* Ensure text color isn't overridden by host page */
+}
+
+.persistentmind-update-banner a.persistentmind-update-link {
+  background-color: #f1c40f; /* Contrasting yellow */
+  color: #2c3e50; /* Dark text for readability */
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.persistentmind-update-banner a.persistentmind-update-link:hover {
+  background-color: #f39c12; /* Darker yellow on hover */
+}
+
+.persistentmind-update-banner .persistentmind-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.persistentmind-update-banner .persistentmind-close-btn:hover {
+  opacity: 1;
+}
