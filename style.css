@@ -1,0 +1,37 @@
+/* --- START OF FILE style.css --- */
+/* Styles for elements injected by the content script into host pages. */
+
+.persistentmind-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #2c3e50; /* A distinct, non-clashing color */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-family: Arial, sans-serif; /* Be specific if page font is an issue */
+  font-size: 14px;
+  opacity: 0; /* Start transparent for fade-in */
+  visibility: hidden; /* Start hidden */
+  z-index: 2147483647; /* Max standard z-index to be on top */
+  pointer-events: none; /* Allow clicks to pass through */
+  user-select: none; /* Prevent text selection */
+  transition: opacity 0.4s ease-in-out, visibility 0s linear 0.4s; /* Delay visibility hide */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.persistentmind-toast.persistentmind-toast-show {
+  opacity: 0.95; /* Slightly transparent */
+  visibility: visible;
+  transition: opacity 0.4s ease-in-out, visibility 0s linear 0s; /* Show immediately */
+}
+
+/*
+  IMPORTANT:
+  - Do NOT put general tag styles (body, h1, button, p, etc.) here.
+  - Do NOT put styles intended only for popup.html or settings.html here.
+    Those belong in popup.css and settings.css respectively.
+  - Ensure class names like "persistentmind-toast" are unique to your extension.
+*/
+/* --- END OF FILE style.css --- */

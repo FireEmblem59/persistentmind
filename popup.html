@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>PersistentMind Memory</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>🧠 Memory</h1>
+    <input
+      id="searchBox"
+      placeholder="Search memory..."
+      style="
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 6px;
+        box-sizing: border-box;
+      "
+    />
+    <div
+      id="memoryList"
+      style="
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px;
+        font-size: 14px;
+      "
+    >
+      <!-- Memory items will be rendered here by JS -->
+    </div>
+    <div style="margin-top: 10px">
+      <button id="clearBtn" class="danger-btn" <!-- Added class for styling -->
+        > 🧹 Clear All
+      </button>
+      <span
+        id="status"
+        style="margin-left: 10px; font-size: 12px; color: green"
+      ></span>
+    </div>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

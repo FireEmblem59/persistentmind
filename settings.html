@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>PersistentMind Settings</title>
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚙️ PersistentMind Settings</h1>
+
+      <div class="setting-item">
+        <label for="enableMemoryFeature">Enable PersistentMind Features:</label>
+        <input type="checkbox" id="enableMemoryFeature" />
+      </div>
+
+      <div class="setting-item">
+        <label for="basePromptPrefix">Base Initial User Prompt Prefix:</label>
+        <p class="description">
+          This text is prepended to your first message in a new chat, along with
+          recent memories. Use it to give general instructions to the AI.
+        </p>
+        <textarea id="basePromptPrefix" rows="8"></textarea>
+      </div>
+
+      <div class="setting-item">
+        <label for="enablePromptPrepending"
+          >Enable Prepending of Initial Prompt (Base + Memory):</label
+        >
+        <input type="checkbox" id="enablePromptPrepending" />
+        <p class="description">
+          If disabled, only memory extraction from AI responses will occur. No
+          prompt will be added to your input.
+        </p>
+      </div>
+
+      <div class="setting-item">
+        <label for="recentMemoriesCount"
+          >Number of Recent Memories to Include in Prompt (0-10):</label
+        >
+        <input
+          type="number"
+          id="recentMemoriesCount"
+          min="0"
+          max="10"
+          value="5"
+        />
+        <p class="description">
+          Set to 0 to disable including memories in the initial prompt.
+        </p>
+      </div>
+
+      <hr />
+      <h2>Debugging</h2>
+      <div class="setting-item">
+        <label for="debugDoNotStrip"
+          >DEBUG: Do Not Strip User Preprompt from Display:</label
+        >
+        <input type="checkbox" id="debugDoNotStrip" />
+        <p class="description">
+          If checked, the prepended prompt will remain visible in your sent
+          messages in the chat UI (for debugging purposes).
+        </p>
+      </div>
+
+      <button id="saveSettings">💾 Save Settings</button>
+      <div id="statusMessage"></div>
+    </div>
+
+    <script type="module" src="settings.js"></script>
+  </body>
+</html>

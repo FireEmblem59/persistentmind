@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Persistent Mind",
+  "version": "1.0",
+  "description": "Enhances chat platforms with persistent memory.",
+  "permissions": ["storage", "activeTab", "notifications", "alarms"],
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://chat.deepseek.com/*",
+        "*://chatgpt.com/*",
+        "*://gemini.google.com/*",
+        "*://aistudio.google.com/*"
+      ],
+      "js": ["loader.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["contentScript.js", "modules/*.js", "platforms/*.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
