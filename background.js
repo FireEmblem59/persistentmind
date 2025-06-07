@@ -1,18 +1,9 @@
 // background.js
 
 // --- CONFIGURATION ---
-// IMPORTANT: Replace this URL with the actual raw URL of your version file on GitHub.
-// To get this URL, go to your file on GitHub and click the "Raw" button.
-// Example: https://raw.githubusercontent.com/YourUsername/YourRepo/main/version.json
 
 const VERSION_CHECK_URL =
-  "https://raw.githubusercontent.com/FireEmblem59/persistentmind/refs/heads/main/version.json";
-
-// The `version.json` file in your repository should look like this:
-// {
-//   "version": "1.1.0",
-//   "details_url": "https://github.com/YourUsername/YourRepo/releases/latest"
-// }
+  "https://raw.githubusercontent.com/FireEmblem59/persistentmind/main/version.json";
 
 const UPDATE_CHECK_ALARM_NAME = "persistentMindUpdateCheck";
 const NOTIFICATION_ID = "persistentMindUpdateNotification";
