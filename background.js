@@ -56,13 +56,6 @@ function showUpdateNotification(newVersion, detailsUrl) {
 async function checkForUpdates() {
   console.log("PersistentMind: Checking for updates...");
 
-  if (!VERSION_CHECK_URL.includes("github.com/")) {
-    console.warn(
-      "PersistentMind: Update check URL is a placeholder. Please configure it in background.js."
-    );
-    return;
-  }
-
   try {
     const response = await fetch(VERSION_CHECK_URL, { cache: "no-store" });
     if (!response.ok) {
