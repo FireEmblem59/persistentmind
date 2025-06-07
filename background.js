@@ -4,8 +4,9 @@
 // IMPORTANT: Replace this URL with the actual raw URL of your version file on GitHub.
 // To get this URL, go to your file on GitHub and click the "Raw" button.
 // Example: https://raw.githubusercontent.com/YourUsername/YourRepo/main/version.json
+
 const VERSION_CHECK_URL =
-  "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/version.json";
+  "https://raw.githubusercontent.com/FireEmblem59/persistentmind/refs/heads/main/version.json";
 
 // The `version.json` file in your repository should look like this:
 // {
